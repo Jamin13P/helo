@@ -6,6 +6,7 @@ export default class Auth extends Component {
     }
 
     render() {
+        console.log(this.props.location)
         return (
             <div>Auth</div>
         )
