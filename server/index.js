@@ -20,3 +20,5 @@ massive({
     );
   })
   .catch((err) => console.log(err));
+
+app.post("/auth/register", ctrl.register)
