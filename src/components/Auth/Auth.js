@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class Auth extends Component {
   constructor() {
@@ -9,7 +10,8 @@ export default class Auth extends Component {
       username: "",
       password: "",
     };
-    this.register = this.register.bind(this)
+    this.register = this.register.bind(this);
+    this.login = this.login.bind(this);
   }
 
   handleUsername(e) {
@@ -44,6 +46,22 @@ export default class Auth extends Component {
       });
   }
 
+  login() {
+    const { username, password } = this.state;
+
+    axios
+      .post("/auth/login", { username, password })
+      .then(() => {
+        this.setState({
+          username: "",
+          password: "",
+        });
+      })
+      .catch((err) => {
+        alert(err.response.request.response);
+      });
+  }
+
   render() {
     console.log(this.props.location);
     return (
@@ -56,8 +74,8 @@ export default class Auth extends Component {
           placeholder="Password"
           onChange={(e) => this.handlePassword(e)}
         />
-        <button>Login</button>
-        <button onClick={this.register}>Register</button>
+        <Link to="/dashboard"><button onClick={this.login}>Login</button></Link>
+        <Link to="/dashboard"><button onClick={this.register}>Register</button></Link>
       </div>
     );
   }

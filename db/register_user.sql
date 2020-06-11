@@ -1,5 +1,5 @@
 insert into users1
-(username, hash)
+(username, password)
 values
 ($1, $2)
 returning *;
