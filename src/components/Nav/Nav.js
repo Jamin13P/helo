@@ -19,6 +19,8 @@ class Nav extends Component {
         <Link to="/">
           <button>Log Out</button>
         </Link>
+        <img src={this.props.profilePic} alt="Profile Pic" />
+        <h2>{this.props.username}</h2>
       </div>
     );
   }

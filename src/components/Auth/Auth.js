@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import {connect} from "react-redux"
+import {setUser} from "../../ducks/actionCreator"
 
-export default class Auth extends Component {
+class Auth extends Component {
   constructor() {
     super();
 
@@ -31,11 +33,12 @@ export default class Auth extends Component {
 
     axios
       .post("/auth/register", { username, password })
-      .then(() => {
-        this.setState({
-          username: "",
-          password: "",
-        });
+      .then((res) => {
+        this.props.setUser(res.data.username, res.data.id)
+        // this.setState({
+        //   username: res.data,
+        //   password: res.data,
+        // });
       })
       .catch((err) => {
         this.setState({
@@ -51,11 +54,12 @@ export default class Auth extends Component {
 
     axios
       .post("/auth/login", { username, password })
-      .then(() => {
-        this.setState({
-          username: "",
-          password: "",
-        });
+      .then((res) => {
+        this.props.setUser(res.data.username, res.data.id)
+        // this.setState({
+        //   username: res.data,
+        //   password: res.data,
+        // });
       })
       .catch((err) => {
         alert(err.response.request.response);
@@ -63,7 +67,6 @@ export default class Auth extends Component {
   }
 
   render() {
-    console.log(this.props.location);
     return (
       <div>
         <input
@@ -80,3 +83,5 @@ export default class Auth extends Component {
     );
   }
 }
+
+export default connect(null, {setUser})(Auth)
