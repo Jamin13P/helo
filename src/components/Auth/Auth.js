@@ -35,13 +35,14 @@ class Auth extends Component {
       .post("/auth/register", { username, password })
       .then((res) => {
         this.props.setUser(res.data.id, res.data.username, res.profilePic);
+        this.props.history.push("/dashboard");
       })
       .catch((err) => {
         this.setState({
           username: this.state.username,
           password: "",
         });
-        alert(err.response.request.response);
+        alert(err);
       });
   }
 
@@ -52,9 +53,10 @@ class Auth extends Component {
       .post("/auth/login", { username, password })
       .then((res) => {
         this.props.setUser(res.data.id, res.data.username, res.profilePic);
+        this.props.history.push("/dashboard");
       })
       .catch((err) => {
-        alert(err.response.request.response);
+        alert(err);
       });
   }
 
@@ -65,18 +67,16 @@ class Auth extends Component {
           placeholder="Username"
           onChange={(e) => this.handleUsername(e)}
           value={this.state.username}
+          type="text"
         />
         <input
           placeholder="Password"
           onChange={(e) => this.handlePassword(e)}
           value={this.state.password}
+          type="password"
         />
-        <Link to="/dashboard">
-          <button onClick={this.login}>Login</button>
-        </Link>
-        <Link to="/dashboard">
-          <button onClick={this.register}>Register</button>
-        </Link>
+        <button onClick={this.login}>Login</button>
+        <button onClick={this.register}>Register</button>
       </div>
     );
   }

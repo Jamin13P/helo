@@ -1,6 +1,6 @@
 import { SET_USER } from "./constraints";
 
-export function setUser(id, username, profilePic) {
+export function setUser(id, username) {
   return {
     type: SET_USER,
     payload: {
