@@ -42,7 +42,7 @@ class Auth extends Component {
           username: this.state.username,
           password: "",
         });
-        alert(err);
+        alert(err.response.request.response);
       });
   }
 
@@ -56,7 +56,7 @@ class Auth extends Component {
         this.props.history.push("/dashboard");
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.request.response);
       });
   }
 

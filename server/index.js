@@ -33,3 +33,5 @@ app.use(
 
 app.post("/auth/register", ctrl.register);
 app.post("/auth/login", ctrl.login);
+
+app.get("/api/posts", ctrl.getAllPosts)
