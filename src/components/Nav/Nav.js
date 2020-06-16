@@ -20,7 +20,7 @@ class Nav extends Component {
           <button>Log Out</button>
         </Link>
         <img src={this.props.profilePic} alt="Profile Pic" />
-        <h2>{this.props.username}</h2>
+        <h4>{this.props.username}</h4>
       </div>
     );
   }

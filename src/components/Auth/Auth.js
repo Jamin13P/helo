@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import {connect} from "react-redux"
-import {setUser} from "../../ducks/actionCreator"
+import { connect } from "react-redux";
+import { setUser } from "../../ducks/actionCreator";
 
 class Auth extends Component {
   constructor() {
@@ -34,15 +34,11 @@ class Auth extends Component {
     axios
       .post("/auth/register", { username, password })
       .then((res) => {
-        this.props.setUser(res.data.username, res.data.id)
-        // this.setState({
-        //   username: res.data,
-        //   password: res.data,
-        // });
+        this.props.setUser(res.data.id, res.data.username, res.profilePic);
       })
       .catch((err) => {
         this.setState({
-          username: "",
+          username: this.state.username,
           password: "",
         });
         alert(err.response.request.response);
@@ -55,11 +51,7 @@ class Auth extends Component {
     axios
       .post("/auth/login", { username, password })
       .then((res) => {
-        this.props.setUser(res.data.username, res.data.id)
-        // this.setState({
-        //   username: res.data,
-        //   password: res.data,
-        // });
+        this.props.setUser(res.data.id, res.data.username, res.profilePic);
       })
       .catch((err) => {
         alert(err.response.request.response);
@@ -72,16 +64,22 @@ class Auth extends Component {
         <input
           placeholder="Username"
           onChange={(e) => this.handleUsername(e)}
+          value={this.state.username}
         />
         <input
           placeholder="Password"
           onChange={(e) => this.handlePassword(e)}
+          value={this.state.password}
         />
-        <Link to="/dashboard"><button onClick={this.login}>Login</button></Link>
-        <Link to="/dashboard"><button onClick={this.register}>Register</button></Link>
+        <Link to="/dashboard">
+          <button onClick={this.login}>Login</button>
+        </Link>
+        <Link to="/dashboard">
+          <button onClick={this.register}>Register</button>
+        </Link>
       </div>
     );
   }
 }
 
-export default connect(null, {setUser})(Auth)
+export default connect(null, { setUser })(Auth);
