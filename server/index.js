@@ -36,4 +36,4 @@ app.post("/auth/login", ctrl.login);
 app.get("/auth/user", ctrl.getUser);
 app.post("/auth/logout", ctrl.logout);
 
-app.get("/api/posts", ctrl.getAllPosts)
+app.get("/api/posts", ctrl.getAllPosts);
