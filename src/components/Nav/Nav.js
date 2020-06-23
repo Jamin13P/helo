@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import {setUser} from "../../ducks/actionCreator"
+import {withRouter} from "react-router-dom"
 
 class Nav extends Component {
   constructor() {
@@ -33,4 +35,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps, {setUser})(withRouter(Nav));

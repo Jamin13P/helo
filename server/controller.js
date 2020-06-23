@@ -50,6 +50,19 @@ module.exports = {
     }
   },
 
+  getUser: (req, res) => {
+    if (req.session.user) {
+      return res.status(200).send(req.session.user);
+    } else {
+      res.sendStatus(404);
+    }
+  },
+
+  logout: (req, res) => {
+    req.session.destroy();
+    res.sendStatus(200);
+  },
+
   getAllPosts: (req, res) => {
     const db = req.app.get("db");
     const {filter} = req.query

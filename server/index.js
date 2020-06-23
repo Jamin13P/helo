@@ -7,8 +7,6 @@ const ctrl = require("./controller");
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
-app.use(express.json());
-
 massive({
   connectionString: CONNECTION_STRING,
   ssl: { rejectUnauthorized: false },
@@ -22,9 +20,11 @@ massive({
   })
   .catch((err) => console.log(err));
 
+app.use(express.json());
+
 app.use(
   session({
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     secret: SESSION_SECRET,
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 14 },
@@ -33,5 +33,7 @@ app.use(
 
 app.post("/auth/register", ctrl.register);
 app.post("/auth/login", ctrl.login);
+app.get("/auth/user", ctrl.getUser);
+app.post("/auth/logout", ctrl.logout);
 
 app.get("/api/posts", ctrl.getAllPosts)
